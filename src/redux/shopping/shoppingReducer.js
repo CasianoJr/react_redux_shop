@@ -36,8 +36,8 @@ const shoppingReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cart: state.cart.map((product) =>
           product.id === action.payload.id
-            ? { ...item, qty: action.payload.qty }
-            : item
+            ? { ...product, qty: action.payload.qty }
+            : product
         ),
       };
     default:

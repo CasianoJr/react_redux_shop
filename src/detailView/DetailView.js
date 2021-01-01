@@ -12,7 +12,8 @@ function DetailView({ products, addToCart }) {
     <div>
       <h2>Detail</h2>
       <div>{product.title}</div>
-      <img src={product.image} height="100" alt={product.title} />
+      <img src={product.image} height="200" alt={product.title} />
+      <div>{product.description}</div>
       <div>{product.price}</div>
       <button onClick={() => addToCart(product.id)}>Add to Cart</button>
     </div>

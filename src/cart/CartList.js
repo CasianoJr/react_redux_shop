@@ -14,7 +14,7 @@ export default function CartList() {
       price += qty * element.price;
     });
     setTotalQty(qty);
-    setTotalPrice(price);
+    setTotalPrice(price.toFixed(2));
   }, [cart]);
   return (
     <>
@@ -22,8 +22,14 @@ export default function CartList() {
       {cart.map((product) => (
         <CartProduct product={product} key={product.id} />
       ))}
-      <div>Total Number of Items: {totalQty}</div>
-      <div>Total Price: {totalPrice}</div>
+      {cart.length !== 0 ? (
+        <>
+          <div>Total Number of Items: {totalQty}</div>
+          <div>Total Price: {totalPrice}</div>
+        </>
+      ) : (
+        <div>Cart is Empty</div>
+      )}
     </>
   );
 }
