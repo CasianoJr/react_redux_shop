@@ -1,14 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addToCart } from "../redux/shopping/shoppingActions";
 
-function DetailView() {
-  return <div>Detail</div>;
+function DetailView({ products, addToCart }) {
+  const params = useParams();
+  const product = products.filter(
+    (item) => parseInt(item.id) === parseInt(params.productID)
+  )[0];
+  return (
+    <div>
+      <h2>Detail</h2>
+      <div>{product.title}</div>
+      <img src={product.image} height="100" alt={product.title} />
+      <div>{product.price}</div>
+      <button onClick={() => addToCart(product.id)}>Add to Cart</button>
+    </div>
+  );
 }
 
 const mapToStateToProps = (state) => {
   return {
-    product: state.shop.currentItem,
+    products: state.shop.products,
   };
 };
 
-export default connect(mapToStateToProps)(DetailView);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id) => dispatch(addToCart(id)),
+  };
+};
+
+export default connect(mapToStateToProps, mapDispatchToProps)(DetailView);
